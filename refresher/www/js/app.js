@@ -34,13 +34,24 @@ angular.module('starter', ['ionic','ngCordova'])
      $scope.user1="你敢不敢下拉刷新!";
      $scope.user2="小样你还真敢!有种继续往下拉";
             $scope.takePhoto=function(){
-            var opt=    {
-                title:'来张自拍吧，么么',
-                okText:'魔镜魔镜我最美丽~~~~'
-            }
-    $ionicPopup.alert(opt);
- $scope.$broadcast('scroll.refreshComplete');
-   var options = {
+    
+   
+    
+    var opt={
+  title: '来张自拍吧么么哒', // String. 弹窗的标题。
+  buttons: [{ //Array[Object] (可选)。放在弹窗footer内的按钮。
+    text: '魔镜魔镜我最美丽~~~~',
+    type: 'button-default',
+    onTap: function(e) {
+      // 当点击时，e.preventDefault() 会阻止弹窗关闭。
+      e.preventDefault();
+    }
+  }, {
+    text: 'OK',
+    type: 'button-positive',
+    onTap: function(e) {
+      // 返回的值会导致处理给定的值。
+     var options = {
                                                                  //这些参数可能要配合着使用，比如选择了sourcetype是0，destinationtype要相应的设置
         quality: 100,                                            //相片质量0-100
         destinationType: Camera.DestinationType.FILE_URI,        //返回类型：DATA_URL= 0，返回作为 base64 編碼字串。 FILE_URI=1，返回影像档的 URI。NATIVE_URI=2，返回图像本机URI (例如，資產庫)
@@ -54,7 +65,8 @@ angular.module('starter', ['ionic','ngCordova'])
         popoverOptions: CameraPopoverOptions,
         saveToPhotoAlbum: true                                   //保存进手机相册
     };
- $cordovaCamera.getPicture(options).then(function(imageData) {
+ 
+    $cordovaCamera.getPicture(options).then(function(imageData) {
         CommonJs.AlertPopup(imageData);
         var image = document.getElementById('myImage');
         image.src=imageData;
@@ -63,6 +75,16 @@ angular.module('starter', ['ionic','ngCordova'])
         // error
         CommonJs.AlertPopup(err.message);
     });
-};
+    }
+  }]
+}
+$ionicPopup.show(opt);
+}
+
+        
+ $scope.$broadcast('scroll.refreshComplete');
+   
+ 
+
 });
     
