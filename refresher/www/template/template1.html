@@ -1,0 +1,12 @@
+<ion-view  ng-controller="photoCtrl">
+    <ion-header-bar class="bar-energized" align-title="center">
+        <i class="title">{{user1}}</i>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher 
+            pulling-text="{{user2}}"
+            on-refresh="takePhoto()">
+        </ion-refresher>
+        
+    </ion-content>
+</ion-view>
